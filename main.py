@@ -1,10 +1,10 @@
 from pytube import YouTube as yt
+from tqdm import tqdm
 
 
-
-def get_video_from_res(streams, res):
+def get_stream_from_res(streams, res):
     """
-    Filter resulting video stream based on resolution
+    Filter the video stream based on resolution
     """
     stream = list(filter(lambda x: x.resolution == res, streams))
 
@@ -14,28 +14,36 @@ def get_video_from_res(streams, res):
 video_url = input("Enter the video url: ")
 youtube_obj = yt(video_url)
 
-# Ask user for resolution to search. E.g. 720p, 1080p
 video_res = input(f"Enter the video resolution for {youtube_obj.title}: ").strip()
 
+# Get the stream
+stream = get_stream_from_res(youtube_obj.streams, video_res)
 
-# Call get_video_from_res function
-req_stream = get_video_from_res(youtube_obj.streams, video_res)[0] # pylint: disable=unsubscriptable-object
+# Check if a stream was found
+if stream is not None:
+    req_stream = stream[0]
+    print()
+    print(f"\nDownloading {youtube_obj.title} ...")
 
-# Print a blank line followed by another line telling the user download has started
-print("\n")
-print(f"\nDownloading {youtube_obj.title} ...")
+    # Create a progress bar
+    progress_bar = tqdm(total=req_stream.filesize, unit='bytes', unit_scale=True)
 
-# Call the download function without specifying a path
-# No path specified means downloaded file(s) will be saved to current directory or script
-# Alternatively you can specify a path using the example shown below
-# req_stream.download("[add full path]")
-req_stream.download()
+    def progress_callback(stream, chunk, bytes_remaining):
+        # Calculate the length of the chunk indirectly
+        length = req_stream.filesize - bytes_remaining
 
-# Print a final message to let the user know download is complete
-print(f"Youtube video: {youtube_obj.title} and Resolution: {video_res} downloaded successfully")
+        # Update the progress bar
+        progress_bar.update(length - progress_bar.n)
 
+    # Set the progress callback function
+    req_stream.on_progress = progress_callback
 
+    # Start the download
+    req_stream.download("/home/sspade/Downloads/yt")
 
-# Sample links to play with
-# https://www.youtube.com/watch?v=q4Xrs4iVA0Q
-# https://www.youtube.com/watch?v=YXPyB4XeYLA
+    # Close the progress bar
+    progress_bar.close()
+
+    print(f"Youtube video: {youtube_obj.title} and Resolution: {video_res} downloaded successfully")
+else:
+    print(f"No stream found for {youtube_obj.title} at resolution {video_res}")
