@@ -8,8 +8,8 @@ My initial script (main.py) was inspired by following an article from [Siddharth
 I added a couple of links to videos you can use to practice
 
 ## Update
-Added a progress bar, so you can see how the download it doing.
-Added some error handlling, in case you pick the wrong resolution when downloading.
+- Added a progress bar, so you can see how the download it doing.
+- Added some error handlling, in case you pick the wrong resolution when downloading.
 
 ## Requirements
 pytube
