@@ -7,6 +7,10 @@ Pytube gives you a way of writing code in Python that let's you download YouTube
 My initial script (main.py) was inspired by following an article from [Siddharth Chandra](https://blog.codekaro.info/download-youtube-videos-using-python-your-own-youtube-downloader).
 I added a couple of links to videos you can use to practice
 
+## Update
+Added a progress bar, so you can see how the download it doing.
+Added some error handlling, in case you pick the wrong resolution when downloading.
+
 ## Requirements
 pytube
 
