@@ -16,7 +16,6 @@ def download_playlist(playlist_url, output_path):
     Download an entire playlist
     """
     playlist = Playlist(playlist_url)
-    playlist.populate_video_urls()
 
     print(f"\nDownloading playlist: {playlist.title} ...")
 
