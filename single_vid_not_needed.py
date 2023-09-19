@@ -1,3 +1,5 @@
+# This code is NOT needed, but I haven't had time to go through it since moving everything to the playlist version.
+
 from pytube import YouTube as yt
 from tqdm import tqdm
 
@@ -47,3 +49,5 @@ if stream is not None:
     print(f"Youtube video: {youtube_obj.title} and Resolution: {video_res} downloaded successfully")
 else:
     print(f"No stream found for {youtube_obj.title} at resolution {video_res}")
+
+
