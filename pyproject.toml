@@ -1,0 +1,10 @@
+[project]
+name = "yt-pytube-dl"
+version = "0.1.0"
+requires-python = ">=3.10"
+dependencies = [
+    "pytubefix>=11.2.0",
+    "retrying>=1.4.2",
+    "tqdm>=4.70.1",
+    "validators>=0.35.0",
+]

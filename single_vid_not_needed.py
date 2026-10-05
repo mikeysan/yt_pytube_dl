@@ -1,6 +1,6 @@
 # This code is NOT needed, but I haven't had time to go through it since moving everything to the playlist version.
 
-from pytube import YouTube as yt
+from pytubefix import YouTube as yt
 from tqdm import tqdm
 
 
